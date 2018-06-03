@@ -1,3 +1,4 @@
+# Application for testing the fanout scenario using sns and sqs
 import config
 import boto3
 

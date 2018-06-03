@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+files:
+  - source: /process_records_from_queue_to_dynamodb.py
+    destination: /home/ec2-user
+  - source: /start_application.sh
+    destination: /home/ec2-user
+permissions:
+  - object: /home/ec2-user/start_application.sh
+    owner: ec2-user
+    mode: 655
+  - object: /home/ec2-user/process_records_from_queue_to_dynamodb.py
+    owner: ec2-user
+    mode: 655
+hooks:
+  AfterInstall:
+    - location: start_application.sh
+      timeout: 300
+      runas: ec2-user
+
