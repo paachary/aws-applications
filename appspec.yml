@@ -3,10 +3,20 @@ os: linux
 files:
   - source: /process_records_from_queue_to_dynamodb.py
     destination: /home/ec2-user
+  - source: /config.py
+    destination: /home/ec2-user
+  - source: /setup_queues_topic.py
+    destination: /home/ec2-user
   - source: /start_application.sh
     destination: /home/ec2-user
 permissions:
   - object: /home/ec2-user/start_application.sh
+    owner: ec2-user
+    mode: 655
+  - object: /home/ec2-user/config.py
+    owner: ec2-user
+    mode: 655
+  - object: /home/ec2-user/setup_queues_topic.py
     owner: ec2-user
     mode: 655
   - object: /home/ec2-user/process_records_from_queue_to_dynamodb.py
