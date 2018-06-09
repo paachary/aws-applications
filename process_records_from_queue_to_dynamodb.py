@@ -4,14 +4,14 @@ import time
 import botocore
 import config
 import json
-import setup_queues_topic 
+import setup_queues_topic
 import logging
 
 
 logging.basicConfig(filename='fanout_process.log', 
                     format='%(asctime)s %(message)s', 
                     datefmt='%m/%d/%Y %I:%M:%S %p', 
-                    level=logging.DEBUG)
+                    level=logging.INFO)
 
 
 def process_records(record):
@@ -83,4 +83,4 @@ def process_mutliple_messages(sqs_queue_name):
 if __name__ == '__main__':
     logging.info("Invoking the process to extract the queue : {}".format(config.QUEUE2))
     process_mutliple_messages(config.QUEUE2)
-    
+
