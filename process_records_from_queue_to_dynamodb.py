@@ -13,8 +13,8 @@ def process_records(record):
     security_id=record["SECURITY_ID"]
 
     try:
-        dynamodb.put_item(TableName="SECURITY_INFO",
-                           Item={"SECURITY_ID":{
+        dynamodb.put_item(TableName=config.DYNAMODBTBL,
+                           Item={"Id":{
                                     "S": security_id},
                                  "SECURITY_RECORD":{
                                     "M": {"LOAD_DT":{"S": record["LOAD_DATE"]},
@@ -23,7 +23,7 @@ def process_records(record):
                                          }
                                   }
                                 },
-                           ConditionExpression='attribute_not_exists(SECURITY_ID)')
+                           ConditionExpression='attribute_not_exists(Id)')
         print("Inserted record {}, into dynamodb table successfully.".format(record))
     except botocore.exceptions.ClientError as e:
         # Ignore the ConditionalCheckFailedException, bubble up
@@ -61,9 +61,10 @@ def process_mutliple_messages(sqs_queue_name):
                          Entries=messages_to_delete)
     except ValueError:
         print("Error while processing the queue")
+    """
     except:
         print("Error while processing the queue")
-
+    """
 
 if __name__ == '__main__':
     process_mutliple_messages(config.QUEUE2)
