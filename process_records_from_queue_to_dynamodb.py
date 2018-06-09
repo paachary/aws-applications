@@ -7,7 +7,11 @@ import json
 import setup_queues_topic 
 import logging
 
-logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.DEBUG)
+
+logging.basicConfig(filename='fanout_process.log', 
+                    format='%(asctime)s %(message)s', 
+                    datefmt='%m/%d/%Y %I:%M:%S %p', 
+                    level=logging.DEBUG)
 
 
 def process_records(record):
